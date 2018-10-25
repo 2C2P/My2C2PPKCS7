@@ -127,7 +127,22 @@ namespace My2C2PPKCS7
 			return x509Certificate2;
 		}
 
-		public X509Certificate2 getPublicCert(string cerFileLoc)
+        public X509Certificate2 getPrivateCertWithBase64(string base64PrivateKey, string cerFilePwd)
+        {
+            X509Certificate2 x509Certificate2 = null;
+            try
+            {
+                byte[] privateKey = Convert.FromBase64String(base64PrivateKey);
+                x509Certificate2 = new X509Certificate2(privateKey, cerFilePwd, X509KeyStorageFlags.MachineKeySet
+                    | X509KeyStorageFlags.Exportable);
+            }
+            catch (Exception exception)
+            {
+            }
+            return x509Certificate2;
+        }
+
+        public X509Certificate2 getPublicCert(string cerFileLoc)
 		{
 			X509Certificate2 x509Certificate2 = null;
 			try

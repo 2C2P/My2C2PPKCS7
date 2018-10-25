@@ -55,6 +55,27 @@ public class pkcs7Helper
         return clearData;
     }
 
-    
+    public string doDecryptUsingBase64(string encryptedData, string certificate, string password)
+    {
+        string clearData = "";
+        if (!string.IsNullOrEmpty(certificate))
+        {
+            try
+            {
+                clearData = myPKCS7.decryptMessage(encryptedData, myPKCS7.getPrivateCertWithBase64(certificate, password));
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        else
+        {
+            clearData = "'" + certificate + "' is not valid.";
+        }
+        return clearData;
+    }
+
+
 
 }
